@@ -1,0 +1,15 @@
+.navbar {
+  margin-bottom: 0 !important;
+}
+body {
+  height: 95vh;
+}
+
+.splash {
+  background: url(../images/llama.jpg) no-repeat   center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}

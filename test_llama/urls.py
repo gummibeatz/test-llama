@@ -19,4 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^llama/', include('llama.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url('', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^$', 'llama.views.home'),
+    url(r'^logout/$', 'llama.views.logout'),
 ]
