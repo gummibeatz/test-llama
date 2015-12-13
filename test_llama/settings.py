@@ -20,6 +20,7 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 # Social auth login urls
 LOGIN_URL          = '/llama/'
 LOGIN_REDIRECT_URL = '/llama/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/llama/'
 LOGIN_ERROR_URL    = '/login-error/'
 
 # Quick-start development settings - unsuitable for production
