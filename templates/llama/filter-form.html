@@ -1,3 +1,19 @@
+<h3>Filters</h3>
+<div id="filter", class="dataSelection">
+  <legend>Institutions to Plot</legend>
+  <input name='v' value="nyu" type="checkbox" checked>NYU
+  </input><br>
+  <input name="v" value="sinai" type="checkbox" checked >Sinai
+  </input>
+</div>
+<div class="dataSelection">
+  <form id="mark"> 
+    <legend>Size of Dot</legend>
+    <input type="radio" name="sepal" value='SD3'>Semantic Dimension 3</input>
+    <br>
+    <input type="radio" name="sepal" value="SD3">Number of Patents (holder)</input>
+  </form>
+</div>
 <div class="dataSelection">
   <label for="xASs">x Axis</label>
   <select name="xAX" id="xAXs">
@@ -12,6 +28,12 @@
     <option value ="SD2">Semantic Dimension 2</option>
     <option value ="SD3">Semantic Dimension 3</option>
   </select>  
+</div>
+
+<div class="dataSelection">
+  <label for="radius_cutoff">Size of mark</span>
+  </label>
+  <input type="range" min="5" max="20" id="radius_cutoff">
 </div>
 
 
