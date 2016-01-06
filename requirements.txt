@@ -1,4 +1,6 @@
+closure==20150315
 Django==1.8.6
+django-require==1.0.9
 oauthlib==1.0.3
 PyJWT==1.4.0
 python-openid==2.2.5

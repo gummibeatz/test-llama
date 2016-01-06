@@ -3,7 +3,6 @@
 {% block static %}
   {% load static from staticfiles %}
   <link rel="stylesheet" type="text/css" href ="{% static 'stylesheets/graphs.css' %}" />
-  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -13,6 +12,5 @@
   <div class = "col-md-9 graph"> 
     {% include 'llama/graphs.html' %}
   </div>
-  <script type="text/javascript" src="{% static 'javascripts/graphs.js' %}"></script>
 {% endblock %}
 
