@@ -99,9 +99,9 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .dataSelection{
-  padding-left: 5em;
   float: left;
   width: 200px;
+  padding-bottom:5px;
 
 }
 
@@ -111,6 +111,13 @@ input[type=range]:focus::-ms-fill-upper {
   text-align: left;
   font-size: 25px;
 }
+
+.col-md-3 {
+    width: 20%;
+    padding-top:10px;
+}
+
+
 
 .axis path,
 .axis line {
