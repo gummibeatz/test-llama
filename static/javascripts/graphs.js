@@ -1,14 +1,14 @@
-require(['dialogBox', 'd3'], function(dialogBox, d3) {
+var d3 = require('d3');
 
 var margin = {top: 20, right: 50, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-  var x = d3.scale.linear()
-    .range([0, width]);
+var x = d3.scale.linear()
+  .range([0, width]);
 
-  var y = d3.scale.linear()
-    .range([height, 0]);
+var y = d3.scale.linear()
+  .range([height, 0]);
 
   var color = d3.scale.category10();
 
@@ -19,24 +19,24 @@ var margin = {top: 20, right: 50, bottom: 30, left: 40},
   };
 
   var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
+.scale(x)
+  .orient("bottom");
 
   var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left");
+.scale(y)
+  .orient("left");
 
 
   var svg = d3.select(".graph").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // add the tooltip area to the webpage
   var tooltip = d3.select(".graph").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
+  .attr("class", "tooltip")
+  .style("opacity", 0);
 
   d3.csv("static/csvs/combined-projections.csv", function(error,data){
     data.forEach(function(d){
@@ -99,7 +99,7 @@ var margin = {top: 20, right: 50, bottom: 30, left: 40},
     .on("click", function(d) {
       var dialogBox = new DialogBox(d);
       console.log((d.target));
-      
+
     });
 
     var legend = svg.selectAll(".legend")
@@ -185,5 +185,3 @@ var margin = {top: 20, right: 50, bottom: 30, left: 40},
     }
 
   });
-
-});
