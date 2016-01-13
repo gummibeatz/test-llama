@@ -9553,11 +9553,10 @@
   if (typeof define === "function" && define.amd) this.d3 = d3, define(d3); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
 }();
 },{}],2:[function(require,module,exports){
-
 var d3 = require('d3');
 
-var margin = {top: 20, right: 50, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
+var margin = {top: 20, right: 40, bottom: 30, left: 40},
+    width = 900 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var x = d3.scale.linear()
@@ -9583,7 +9582,7 @@ var y = d3.scale.linear()
   .orient("left");
 
 
-  var svg = d3.select(".graph").append("svg")
+  var svg = d3.select("#graph").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -9594,7 +9593,7 @@ var y = d3.scale.linear()
   .attr("class", "tooltip")
   .style("opacity", 0);
 
-  d3.csv("static/csvs/combined-projections.csv", function(error,data){
+  d3.csv("static/data/combined-projections.csv", function(error,data){
     data.forEach(function(d){
       d.SD1 = +d.SD1;
       d.SD2 = +d.SD2;
@@ -9741,5 +9740,45 @@ var y = d3.scale.linear()
     }
 
   });
+
+// saving image
+d3.select("#save").on("click", function(){
+  var html = d3.select("svg")
+        .attr("version", 1.1)
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .node().parentNode.innerHTML;
+
+  console.log(html);
+
+
+  var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
+  var img = '<img src="'+imgsrc+'">'; 
+  d3.select("#svgdataurl").html(img);
+
+  console.log(img);
+
+  var canvas = document.querySelector("canvas"),
+	  context = canvas.getContext("2d");
+
+  var image = new Image;
+
+  console.log(image);
+
+  image.src = imgsrc;
+  image.onload = function() {
+	  context.drawImage(image, 0, 0);
+
+	  var canvasdata = canvas.toDataURL("image/png");
+
+	  var pngimg = '<img src="'+canvasdata+'">'; 
+  	  d3.select("#pngdataurl").html(pngimg);
+
+	  var a = document.createElement("a");
+	  a.download = "sample.png";
+	  a.href = canvasdata;
+	  a.click();
+  };
+
+});
 
 },{"d3":1}]},{},[2]);
