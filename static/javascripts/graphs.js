@@ -38,7 +38,7 @@ var y = d3.scale.linear()
   .attr("class", "tooltip")
   .style("opacity", 0);
 
-  d3.csv("static/data/combined-projections.csv", function(error,data){
+  d3.csv(STATIC_URL + "data/combined-projections.csv", function(error,data){
     data.forEach(function(d){
       d.SD1 = +d.SD1;
       d.SD2 = +d.SD2;
