@@ -9555,8 +9555,8 @@
 },{}],2:[function(require,module,exports){
 var d3 = require('d3');
 
-var margin = {top: 20, right: 40, bottom: 30, left: 40},
-    width = 900 - margin.left - margin.right,
+var margin = {top: 20, right: 50, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var x = d3.scale.linear()
@@ -9638,6 +9638,7 @@ var y = d3.scale.linear()
       .attr("cx", function(d) { return x(d.SD1); })
       .attr("cy", function(d) { return y(d.SD2); })
       .style("fill", function(d) { return color(d.institute);})
+      .style("stroke", "#282b2b")
       .on("mouseover", function(d) {
         tooltip.transition()
           .duration(200)

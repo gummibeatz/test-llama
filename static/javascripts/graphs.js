@@ -83,6 +83,7 @@ var y = d3.scale.linear()
       .attr("cx", function(d) { return x(d.SD1); })
       .attr("cy", function(d) { return y(d.SD2); })
       .style("fill", function(d) { return color(d.institute);})
+      .style("stroke", "#282b2b")
       .on("mouseover", function(d) {
         tooltip.transition()
           .duration(200)

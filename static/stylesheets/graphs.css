@@ -123,10 +123,6 @@ input[type=range]:focus::-ms-fill-upper {
   shape-rendering: crispEdges;
 }
 
-.dot {
-  stroke: #000;
-}
-
 #filter {
   position: static;
 }
