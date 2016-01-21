@@ -1,4 +1,10 @@
+// thank you  david guttman
+// Bootstrap wants jQuery global =(
+window.jQuery = $ = require('jquery');
+var bootstrap = require('bootstrap');
+
 var d3 = require('d3');
+
 
 var margin = {top: 20, right: 50, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
@@ -91,6 +97,28 @@ var y = d3.scale.linear()
         tooltip.html(d.PI + " ("+d.institute+")")
           .style("left", (d3.event.pageX + 40) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
+
+        console.log("mouse in");
+
+        // create a row for each object in the data
+        var tbody = d3.select("tbody");
+        console.log(d);
+        var rows = tbody.selectAll("tr")
+          .data(d)
+          .enter()
+          .append("tr");
+
+        // create a cell in each row for each column
+        var cells = rows.selectAll("td")
+          .data(function(row) {
+            return columns.map(function(column) {
+              return {column: column, value: row[column]};
+            });
+          })
+        .enter()
+          .append("td")
+          .attr("style", "font-family: Courier") // sets the font style
+          .html(function(d) { return d.value; });
       })
     .on("mouseout", function(d) {
       tooltip.transition()
@@ -98,9 +126,7 @@ var y = d3.scale.linear()
         .style("opacity", 0);
     })
     .on("click", function(d) {
-      var dialogBox = new DialogBox(d);
-      console.log((d.target));
-
+      console.log((d));
     });
 
     var legend = svg.selectAll(".legend")
@@ -185,14 +211,40 @@ var y = d3.scale.linear()
         .attr("opacity",1);
     }
 
+
+
+  // The table generation function
+  function tabulate(data, columns) {
+    console.log("tabulate begin");
+    var table = d3.select("#plot-table").append("table")
+      .attr("style", "margin-left: 250px"),
+    thead = table.append("thead"),
+    tbody = table.append("tbody");
+
+    // append the header row
+    thead.append("tr")
+      .selectAll("th")
+      .data(columns)
+      .enter()
+      .append("th")
+      .text(function(column) { return column; });
+
+    return table;
+  }
+
+  // render the table
+  var peopleTable = tabulate(data, ["PI","institute", "SD1","SD2","SD3"]);
+
+
+
   });
 
 // saving image
 d3.select("#save").on("click", function(){
   var html = d3.select("svg")
-        .attr("version", 1.1)
-        .attr("xmlns", "http://www.w3.org/2000/svg")
-        .node().parentNode.innerHTML;
+    .attr("version", 1.1)
+    .attr("xmlns", "http://www.w3.org/2000/svg")
+    .node().parentNode.innerHTML;
 
   console.log(html);
 
@@ -204,7 +256,7 @@ d3.select("#save").on("click", function(){
   console.log(img);
 
   var canvas = document.querySelector("canvas"),
-	  context = canvas.getContext("2d");
+  context = canvas.getContext("2d");
 
   var image = new Image;
 
@@ -212,17 +264,19 @@ d3.select("#save").on("click", function(){
 
   image.src = imgsrc;
   image.onload = function() {
-	  context.drawImage(image, 0, 0);
+    context.drawImage(image, 0, 0);
 
-	  var canvasdata = canvas.toDataURL("image/png");
+    var canvasdata = canvas.toDataURL("image/png");
 
-	  var pngimg = '<img src="'+canvasdata+'">'; 
-  	  d3.select("#pngdataurl").html(pngimg);
+    var pngimg = '<img src="'+canvasdata+'">'; 
+    d3.select("#pngdataurl").html(pngimg);
 
-	  var a = document.createElement("a");
-	  a.download = "sample.png";
-	  a.href = canvasdata;
-	  a.click();
+    var a = document.createElement("a");
+    a.download = "sample.png";
+    a.href = canvasdata;
+    a.click();
   };
 
+
 });
+
