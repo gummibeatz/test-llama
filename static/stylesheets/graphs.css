@@ -154,4 +154,7 @@ left: 430px;
 right: 0px;
 }
 
+th, td {
+  width: 200px;
+}
 
