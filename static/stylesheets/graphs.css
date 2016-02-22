@@ -133,28 +133,32 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 #yAXs {
-bottom: 30px;
-left: 315px;
-
+  bottom: 30px;
+  left: 315px;
 }
 
 #label {
-position: static;
-top: 599px;
-bottom: 125px;
-left: 300px;
-right: 0px;
+  position: static;
+  top: 599px;
+  bottom: 125px;
+  left: 300px;
+  right: 0px;
 }
 
 #label2 {
-position: static;
-top: 599px;
-bottom: 125px;
-left: 430px;
-right: 0px;
+  position: static;
+  top: 599px;
+  bottom: 125px;
+  left: 430px;
+  right: 0px;
+}
+
+table {
+  margin-bottom: 100px;
 }
 
 th, td {
-  width: 200px;
+  padding: 50px, 4px;
+  width: 400px;
 }
 

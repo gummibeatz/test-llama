@@ -45,6 +45,7 @@ var tooltip = d3.select(".graph").append("div")
   .style("opacity", 0);
 
 d3.csv(STATIC_URL + "data/combined-projections.csv", function(error,data){
+  console.log(data);
   data.forEach(function(d){
     d.SD1 = +d.SD1;
     d.SD2 = +d.SD2;
@@ -103,7 +104,6 @@ d3.csv(STATIC_URL + "data/combined-projections.csv", function(error,data){
 
       console.log("mouse in");
       // create a row for each object in the data
-      console.log(d);
       rowData.push(d);
       updateTable(rowData,["PI","institute", "SD1","SD2","SD3"]);
       dataPointSelected = false;
@@ -117,8 +117,8 @@ d3.csv(STATIC_URL + "data/combined-projections.csv", function(error,data){
         .style("opacity", 0);
       if(!dataPointSelected) {
         rowData.pop();
-        updateTable(rowData,["PI","institute", "SD1","SD2","SD3"]);
       }
+      updateTable(rowData,["PI","institute", "SD1","SD2","SD3"]);
     });
 
   var legend = svg.selectAll(".legend")
@@ -222,36 +222,34 @@ d3.csv(STATIC_URL + "data/combined-projections.csv", function(error,data){
   
   function updateTable(rowData, columns) {
     table = d3.select("table")
-
+      .attr("style", "margin-left: 50px");
+    
     // create a row for each object in the data
-    var rows = table.selectAll("tr")
-      .data(rowData)
-      .enter()
+    var rows = table.selectAll("tr").data(rowData)
+    
+    rows.enter()
       .append("tr");
+    
+    // remove old rows
+    rows.exit()
+      .remove();
+  
     // create a cell in each row for each column
     var cells = rows.selectAll("td")
       .data(function(row) {
         return columns.map(function(column) {
           return {column: column, value: row[column]};
         });
-      })
-    .enter()
-      .append("td")
-      .attr("style", "font-family: Courier") // sets the font style
-      .html(function(d) { return d.value; })
+      });
 
-    cells = rows.selectAll("td")
-      .data(function(row) {
-        return columns.map(function(column) {
-            return {column: column, value: row[column]};
-          });
-        })
-      .exit()
-        .transition()
-        .delay(0)
-        .duration(0)
-        .style('opacity', 0.0)
-        .remove();
+    // cell ENTER 
+    cells.enter()
+      .append("td")
+      .html(function(d) { return d.value; });
+    
+    // cell EXIT
+    cells.exit()
+      .remove();
 
     return table;
   }
