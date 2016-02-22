@@ -154,11 +154,12 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 table {
-  margin-bottom: 100px;
+  margin-bottom: 100px; 
+  margin-top: 50px;
 }
 
 th, td {
   padding: 50px, 4px;
-  width: 400px;
+  min-width: 175px;
 }
 
